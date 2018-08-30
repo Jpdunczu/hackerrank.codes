@@ -6,6 +6,21 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
+/*
+    Function Description
+
+Complete the luckBalance function in the editor below. It should return an integer that represents the maximum luck balance achievable.
+
+luckBalance has the following parameter(s):
+
+k: the number of important contests Lena can lose
+contests: a 2D array of integers where each  contains two integers that represent the luck balance and importance of the  contest.
+Input Format
+
+The first line contains two space-separated integers  and , the number of preliminary contests and the maximum number of important contests Lena can lose. 
+Each of the next  lines contains two space-separated integers,  and , the contest's luck balance and its importance rating.
+*/
+
 public class Solution {
 
     // Complete the luckBalance function below.
