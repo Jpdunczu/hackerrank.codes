@@ -1,0 +1,79 @@
+/*
+Any person in the queue can bribe the person directly in front of them to swap positions. 
+If two people swap positions, they still wear the same sticker denoting their original places in line. 
+One person can bribe at most two others. For example, if and  bribes , the queue will look like this: .
+
+Fascinated by this chaotic queue, you decide you must know the minimum number of bribes that took place 
+to get the queue into its current state!
+*/
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    private static int bribes = 0;
+    //private static int total = 0;
+
+    // Alg which counts how many switches were made to scramble an array
+    // Complete the minimumBribes function below.
+    static void minimumBribes(int[] q) {
+        for(int i = 0; i < q.length-1; i++ ){
+            // check if out of order
+           if( q[i] > q[i+1] ){
+               int j = i + 1;
+               while( j >= 1 && q[j-1] > q[j] ){
+                   // move the element left as long as the element to the left is >
+                   // count each element which has moved.
+                   int temp = q[j];
+                   q[j] = q[j-1];
+                   q[j-1] = temp;
+                   bribes++;
+                   j--;
+               }
+           }
+        }
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int t = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int tItr = 0; tItr < t; tItr++) {
+            int n = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            int[] q = new int[n];
+
+            String[] qItems = scanner.nextLine().split(" ");
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            boolean chaos = false;
+            for (int i = 0; i < n; i++) {
+                int qItem = Integer.parseInt(qItems[i]);
+                q[i] = qItem;
+                if((q[i] - (i+1)) > 2 ){
+                    System.out.println("Too chaotic");
+                    chaos = true;
+                    break;
+                }
+            }
+            if( chaos ){
+                continue;
+            }
+            bribes = 0;
+            minimumBribes(q);
+            System.out.println(bribes);
+        }
+
+        scanner.close();
+        
+    }
+}
